@@ -9,9 +9,7 @@ public class SpawnerController : MonoBehaviour {
 
     public int spawn_limit;
     public static int curr_spawned;
-    public bool can_spawn;
-
-    private bool once;
+    public static bool can_spawn;
 
 
 	void Start () {
@@ -19,7 +17,7 @@ public class SpawnerController : MonoBehaviour {
 
         //difficulty related.
         amount_killed = 0;
-        difficulty = 1;
+        difficulty = 1.0f;
 
         //spawn amount controllers.
         spawn_limit = 5;
@@ -27,14 +25,10 @@ public class SpawnerController : MonoBehaviour {
 
         //permissions.
         can_spawn = true;
-        once = false;
 	}
 	
 	// Update is called once per frame.
 	void Update () {
-
-        Debug.Log("difficulty:: " + difficulty + "   enemies killed:: " + amount_killed);
-
 
         if (amount_killed >= 35)
             difficulty = 4.5f;

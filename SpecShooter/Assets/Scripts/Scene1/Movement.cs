@@ -69,7 +69,9 @@ public class Movement : MonoBehaviour {
         {
             isDead = true;
 
+
             anim.SetBool("isDead", true);
+            turn_speed = 0.0f;
             Destroy(gameObject, 1.0f);
 
         }

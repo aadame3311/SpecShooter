@@ -12,24 +12,26 @@ public class enemy1 : MonoBehaviour {
     public SpawnerController sc;
 
     // self explanatory...
-    private float health = 5f;
+    private float health;
 
     private GameObject player;
     private float distance;
 
     // speed at which object moves.
-    private float def_speed = 5.0f;
-    private float speed = 5.0f;
+    private float def_speed;
+    private float speed;
 
     private Animator anim;
 
     // Use this for initialization
     void Start () {
+        // initialize
+        health = 4.0f;
+        def_speed = 5.0f;
+        speed = (def_speed * SpawnerController.difficulty) / 3f;
 
-        speed = (def_speed * SpawnerController.difficulty) / 2;
 
-        player = GameObject.FindGameObjectWithTag("Player");
-
+        // grab components.
         anim = gameObject.GetComponent<Animator>();
 
         // Makes sure only one instance of the object gets recorded for the SpawnerController script
@@ -38,10 +40,6 @@ public class enemy1 : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        // find distance between enemy and player.
-
-        Debug.Log(speed);
-
 
         if (health <= 0)
         {
@@ -69,6 +67,8 @@ public class enemy1 : MonoBehaviour {
     {
         if (collision.gameObject.tag == "PlayerLaser")
             health--;
+        if (collision.gameObject.tag == "sniper")
+            health -= 5;
         if (collision.gameObject.tag == "Player")
             speed = 0;
     }

@@ -8,15 +8,13 @@ public class asteroid : MonoBehaviour {
     //otherwise it would decrease 1 more than once since it does it every frame.
     bool once;
 
-
-    //spawner script/gameobject.
-    public GameObject s;
-    public SpawnerController sc;
-
+    // turn speed is used to simulate an asteroids natural movement in a vacum
     private float turn_speed = 40f;
     private float health = 10f;
 
-    private GameObject player;
+    // speed at which the asteroid moves towards the origin. 
+    // def_speed is used by the equation that calculates the speed as difficulty rises. 
+    // this way, the def_speed always stays the same and we can base faster speeds on that.
     private float def_speed = 2.0f;
     private float speed = 2.0f;
 
@@ -25,10 +23,8 @@ public class asteroid : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        speed = (def_speed * SpawnerController.difficulty) / 2;
+        speed = (def_speed * SpawnerController.difficulty) / 2.5f;
 
-        // find player
-        player = GameObject.FindGameObjectWithTag("Player");
 
         anim = gameObject.GetComponent<Animator>();
 
@@ -49,6 +45,11 @@ public class asteroid : MonoBehaviour {
                 once = true;
                 SpawnerController.curr_spawned--;
                 SpawnerController.amount_killed++;
+
+                // determine randomly which weapon to drop
+                // it should be more likely to NOT drop anything at all. 
+                PlayerAttack.weapon_to_use = (int)(Random.value * 2);
+
             }
 
             anim.SetBool("Explosion", true);
@@ -65,6 +66,8 @@ public class asteroid : MonoBehaviour {
     {
         if (collision.gameObject.tag == "PlayerLaser")
             health--;
+        if (collision.gameObject.tag == "sniper")
+            health -= 5;
         if (collision.gameObject.tag == "Player")
             speed = 0;
     }

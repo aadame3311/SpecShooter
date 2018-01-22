@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-    public SpawnerController sc;
-    public GameObject s;
-
     public GameObject asteroid;
     public GameObject enemy1;
     private float interval = 1f;
@@ -22,7 +19,7 @@ public class Spawner : MonoBehaviour {
             val = Random.value * 25;
 
             // only a certain amount of enemies are allowed to be spawned.
-            if (sc.can_spawn)
+            if (SpawnerController.can_spawn)
             {
                 if ((int)val == 3)
                 {

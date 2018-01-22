@@ -12,8 +12,8 @@ public class bullet : MonoBehaviour {
     {
         transform.position += transform.up * Time.deltaTime * bullet_speed;
 
-        // regular bullets should only stay alive for no longer than 1 second.
-        Destroy(gameObject, 1);
+        // regular bullets should only stay alive for no longer than 1.5 seconds.
+        Destroy(gameObject, 1.5f);
 	}
 
 
