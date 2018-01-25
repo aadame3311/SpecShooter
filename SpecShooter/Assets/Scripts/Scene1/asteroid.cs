@@ -42,13 +42,17 @@ public class asteroid : MonoBehaviour {
             // decrease the amount of enemies currently spawned on screen.
             if (!once)
             {
+                // informs the spawner controller there has been a change to amount of enemies spawned.
                 once = true;
                 SpawnerController.curr_spawned--;
                 SpawnerController.amount_killed++;
 
+
+                //---this section communicates with other scripts so that they can know a new weapon was aquired---//
                 // determine randomly which weapon to drop
                 // it should be more likely to NOT drop anything at all. 
                 PlayerAttack.weapon_to_use = (int)(Random.value * 2);
+
 
             }
 

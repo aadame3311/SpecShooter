@@ -9,14 +9,19 @@ public class PauseMenu : MonoBehaviour {
 
     private GameObject player;
 
+
+    // for UI Pause button. 
+    private bool is_paused;
+
 	// Use this for initialization
 	void Start () {
+        is_paused = false;
         player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (gameController.isPaused && player != null)
+        if (gameController.isPaused && player != null || is_paused)
             pause.SetActive(true);
         else if (!gameController.isPaused && player == null)
             game_over.SetActive(true);
@@ -27,4 +32,10 @@ public class PauseMenu : MonoBehaviour {
         }
             
 	}
+
+    public void IsPaused()
+    {
+        is_paused = !is_paused;
+        gameController.isPaused = !gameController.isPaused;
+    }
 }

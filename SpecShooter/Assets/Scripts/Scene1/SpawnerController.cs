@@ -30,13 +30,14 @@ public class SpawnerController : MonoBehaviour {
 	// Update is called once per frame.
 	void Update () {
 
-        if (amount_killed >= 35)
+        // base difficulty on player score.
+        if (amount_killed >= 60)
             difficulty = 4.5f;
-        else if (amount_killed >= 20)
+        else if (amount_killed >= 40)
             difficulty = 4.0f;
-        else if (amount_killed >= 10)
+        else if (amount_killed >= 25)
             difficulty = 3.0f;
-        else if (amount_killed >= 5)
+        else if (amount_killed >= 10)
             difficulty = 2.0f;
 
 

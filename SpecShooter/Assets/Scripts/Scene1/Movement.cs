@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
+    // movement for UI
+    private bool left;
+    private bool right;
+
+
+
     // determine if player is dead. 
     public static bool isDead;
 
@@ -19,6 +25,9 @@ public class Movement : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        left = false;
+        right = false;
+
         isDead = false;
         turn_speed = 300f;
 
@@ -40,38 +49,51 @@ public class Movement : MonoBehaviour {
         else if (SpawnerController.difficulty == 4)
             turn_speed = 450;
 
-
-        // rotate player when left or right is pressed. 
-        float sides = Input.GetAxisRaw("Horizontal");
-        float move = Input.GetAxisRaw("Vertical");
-
-
-        // rotation movement.
-        if (sides != 0)
+        if (right)
         {
-            if (sides < 0)
-            {
-                // rotate right. 
-                transform.Rotate(0, 0, -sides * Time.deltaTime * turn_speed);
-            }
-            else
-            {
-                // rotate left.
-                transform.Rotate(0, 0, -sides * Time.deltaTime * turn_speed);
-            }
+            transform.Rotate(0, 0, -1 * Time.deltaTime * turn_speed);
+
         }
+        else if (left)
+        {
+            transform.Rotate(0, 0, 1 * Time.deltaTime * turn_speed);
+
+        }
+        // transform.Rotate(0, 0, -1 * Time.deltaTime * turn_speed);
+    }
+
+    public void LookRight()
+    {
+        Debug.Log(transform.rotation);
+        right = true;
+        left = false;
+
 
     }
+    public void LookLeft()
+    {
+
+        right = false;
+        left = true;
+    }
+    public void OnRelease()
+    {
+        right = false;
+        left = false;
+    }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            turn_speed = 0.0f;
+
             isDead = true;
 
 
             anim.SetBool("isDead", true);
-            turn_speed = 0.0f;
             Destroy(gameObject, 1.0f);
 
         }

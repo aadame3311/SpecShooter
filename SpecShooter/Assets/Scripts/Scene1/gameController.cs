@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class gameController : MonoBehaviour {
+public class gameController : MonoBehaviour
+{
 
 
 
@@ -13,22 +15,30 @@ public class gameController : MonoBehaviour {
     private GameObject player;
     private Movement mov;
 
-	// Use this for initialization
-	void Start () {
+    // weapon text indicator. 
+    public Text weapon;
+
+    // Use this for initialization
+    void Start()
+    {
         isPaused = false;
 
         player = GameObject.FindGameObjectWithTag("Player");
         mov = player.GetComponent<Movement>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+
+
+
+        //---Pause Menu Check---//
         // checks if game is paused
         if (Input.GetButtonDown("Pause") && !Movement.isDead)
-        {
             isPaused = !isPaused;
-        }
+
         if (isPaused)
             Time.timeScale = 0;
         else
@@ -39,6 +49,8 @@ public class gameController : MonoBehaviour {
         {
             Time.timeScale = 0;
         }
-            
-	}
+
+    }
 }
+
+

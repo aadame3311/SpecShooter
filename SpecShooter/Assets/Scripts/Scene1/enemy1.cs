@@ -14,21 +14,25 @@ public class enemy1 : MonoBehaviour {
     // self explanatory...
     private float health;
 
-    private GameObject player;
-    private float distance;
-
     // speed at which object moves.
     private float def_speed;
     private float speed;
 
     private Animator anim;
 
+    private float div;
+
     // Use this for initialization
     void Start () {
         // initialize
         health = 4.0f;
         def_speed = 5.0f;
-        speed = (def_speed * SpawnerController.difficulty) / 3f;
+       
+        //--calculate speed of enemies based on difficulty--//
+        if (SpawnerController.difficulty > 3) div = 3.5f;
+        else div = 3.0f;
+        speed = (def_speed * SpawnerController.difficulty) / div;
+        //--------------------------------------------------//
 
 
         // grab components.
@@ -48,7 +52,7 @@ public class enemy1 : MonoBehaviour {
                 // decrease the amount of enemies currently spawned on screen.
                 once = true;
                 SpawnerController.curr_spawned--;
-                SpawnerController.amount_killed++;
+                SpawnerController.amount_killed+=2;
             }
 
             anim.SetBool("isDead", true);

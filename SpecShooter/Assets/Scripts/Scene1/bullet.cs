@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour {
 
-    float bullet_speed = 20f;
-    Vector2 tmpPos;
+    float bullet_speed;
+
+    private void Start()
+    {
+        if (gameObject.tag == "sniper")
+            bullet_speed = 40f;
+        else if (gameObject.tag == "PlayerLaser")
+            bullet_speed = 20f;
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
